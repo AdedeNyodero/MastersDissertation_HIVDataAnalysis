@@ -1,15 +1,16 @@
 # MastersDissertation_HIVDataAnalysis_25
 This repository contains code used for my masters dissertation on Quantitative analysis of suspected HIV proviral DNA reads observed from the strand-specific HIV RNA metagenomic libraries. 
-This dissertation was conceptualized, writtedn and submitted between May 2025 to July 2025
+This dissertation was conceptualized, written and submitted between May 2025 to July 2025
 
-The steps of my work that used custon Python code are:
+The steps of my work that used custom Python code are:
 1. Strand-specific BAM Coverage Analysis (Code: LogCoverage_and_Coverage_ratios.py)
+2. Summary of Pacbio read percentages (Code: Summary_of_Pacbio_read_percentages.py)
 
 
 
 
 
-The python codes I used for each step of my analysis is documented here for reproducibility
+The python codes I used for each step of my analysis are documented here for reproducibility
    
 
 # Step 1: Strand-Specific BAM Coverage Analysis
@@ -52,5 +53,12 @@ pip install pysam matplotlib numpy (on bash)
 
 ```bash
 python LogCoverage_and_Coverage_ratios.py --input_dir bam_folder --output_dir coverage_outputs
+
+-
+Install requirements via pip:
+
+```bash
+pip install matplotlib numpy
+
 
  
