@@ -3,10 +3,10 @@ This repository contains code used for my masters dissertation on Quantitative a
 This dissertation was conceptualized, written and submitted between May 2025 to July 2025
 
 The steps of my work that used custom Python code are:
-1. Strand-Specific BAM Coverage Analysis of pooled datasets (Code: LogCoverage_and_Coverage_ratios.py)
+1. Strand-specific BAM Coverage Analysis of pooled datasets (Code: LogCoverage_and_Coverage_ratios.py)
 2. Summary plot of read percentages from pooled datasets (Code: Summary_of_Pacbio_read_percentages.py)
-3. Strand-Specific BAM Coverage Analysis of individual datasets (Code: PerSample_LogCoverage_and_Coverage_ratios.py)
-4.
+3. Strand-specific BAM Coverage Analysis of individual datasets (Code: PerSample_LogCoverage_and_Coverage_ratios.py)
+4. Strand-specific analysis of reads that span user defined HXB2 genomic regions (Code: Analysis_of_reads_spanning_fiveprime_U3_R_region.py)
 
 
 
@@ -126,6 +126,16 @@ Install dependencies:
 ```bash
 pip install pysam numpy matplotlib seaborn pandas plotly
 ```
+
+## Usage
+
+```bash
+python PerSample_LogCoverage_and_Coverage_ratios.py \
+    --input_dir ./bam_files \
+    --output_dir ./results \
+    --flip_strands #optional for dUTP strand flipped libraries
+```
+
 ## Input
 
 - A directory of **sorted and indexed BAM files**
@@ -156,17 +166,73 @@ interactive_scatter.html
 ```   
 
 
+
+
+# Step 4: Strand-specific analysis of reads that span user defined HXB2 genomic regions
+
+A Python pipeline that analyzes strand-specific reads that span a user-defined genomic region from one or more BAM files. It supports visual summaries, reverse strand extraction, and publication-ready plots.
+
+---
+
+## Features
+
+- Counts reads spanning a defined region (default: 450–633 bp).
+- Classifies reads as forward or reverse strand based on alignment orientation.
+- Outputs:
+  - Read summary CSV file
+  - Percentage Forward/Reverse count bar plots
+  - Grouped bar plots (optional)
+  - Lollipop plots for % reverse strand reads (optional)
+  - Reverse strand FASTA, BAM, and TSV output (if `--reverse-only` is set)
+
+---
+
+## Requirements
+
+- Python 3.6+
+- `pysam`  `matplotlib`  `pandas` 
+- `argsparse`  `csv`  `os`  `re` (standard libraries)
+
+Install required libraries:
+```bash
+pip install matplotlib pandas
+```
 ## Usage
 
 ```bash
-python PerSample_LogCoverage_and_Coverage_ratios.py \
-    --input_dir ./bam_files \
-    --output_dir ./results \
-    --flip_strands #optional for dUTP strand flipped libraries
+
+python Analysis_of_reads_spanning_fiveprime_U3_R_region.py *.bam -o output_folder --region 450 633 --plot-grouped --plot-lollipop
+
+```
+### Required arguments:
+*.bam: One or more sorted BAM files.
+
+### Optional arguments:
+```
+-o, --output_dir: Output directory (default: strand_read_output)
+
+--region START END: Genomic region to analyze (default: 450–633)
+
+--reverse-only: Only process and export reverse strand reads
+
+--plot-grouped: Include grouped bar chart of forward/reverse counts
+
+--plot-lollipop: Include lollipop plot for % reverse reads
+
+```
+## Input
+
+- A directory of **sorted and indexed BAM files**
+
+## Example Output
+```
+strand_read_output/
+   sample1_spanning_reads.tsv
+   sample1_reverse_reads.fasta
+   sample1_reverse_reads.bam
+   strand_read_summary.csv
+   strand_read_summary.png
+   grouped_read_counts.png
+   lollipop_reverse_percent.png
 ```
 
-
-Install requirements via pip:
-```bash
-pip install matplotlib numpy seaborn pandas plotly
-```
