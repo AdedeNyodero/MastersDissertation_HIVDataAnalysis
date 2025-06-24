@@ -22,7 +22,7 @@ See LogCoverage_and_Coverage_ratios.py for code used
 ## Key Features
 
 - Separates forward and reverse reads into distinct BAM files.
-- Computes per-base genome-wide coverage (log₁₀-scaled).
+- Computes per-base genome-wide coverage (log10 scaled).
 - Plots strand-specific coverage profiles.
 - Calculates and visualizes the forward/reverse strand coverage ratio.
 - Outputs tabulated per-position coverage and ratios.
