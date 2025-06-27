@@ -3,9 +3,13 @@ This repository contains code used for my masters dissertation on Quantitative a
 This dissertation was conceptualized, written and submitted between May 2025 to July 2025
 
 The steps of my work that used custom Python code are:
-1. Strand-specific BAM Coverage Analysis of pooled datasets (Code: LogCoverage_and_Coverage_ratios.py)
-2. Summary plot of read percentages from pooled datasets (Code: Summary_of_Pacbio_read_percentages.py)
-3. Strand-specific BAM Coverage Analysis of individual datasets (Code: PerSample_LogCoverage_and_Coverage_ratios.py)
+1. Strand-specific BAM Coverage Analysis of Pacbio datasets (Code: LogCoverage_and_Coverage_ratios.py)
+   
+2  (a)Summary plot of read percentages from pooled datasets (Code: Summary_of_Pacbio_read_percentages.py)
+   (b)Log-scaled scatter plot of Forward vs Reverse read counts per sample fo individual datasets (Code: Forward_to_reverse_read_strand_per_sample.py)
+   
+3. Strand-specific BAM Coverage Analysis of individual Illumina datasets (Code: PerSample_LogCoverage_and_Coverage_ratios.py)
+   
 4. Strand-specific analysis of reads that span user defined HXB2 genomic regions (Code: Analysis_of_reads_spanning_fiveprime_U3_R_region.py)
 
 
@@ -64,7 +68,7 @@ Install requirements via pip:
 
 pip install matplotlib numpy
 ```
-# Step 2: Summary plot of read percentages from pooled datasets
+# Step 2(a): Summary bar plot of read percentages from pooled Pacbio datasets
 
 This script visualizes the proportion of **forward vs. reverse strand reads** across different sample sets based on strand-specific summary statistics.
 
@@ -97,6 +101,76 @@ Each sample is represented by a bar divided into:
 Percentages are displayed on the bars for easy interpretation.
 ---
 
+# Step 2(b): Log-scaled scatter plot of Forward vs Reverse read counts per sample fo individual datasets
+
+This Python script generates a **log-log scatter plot** of **forward vs reverse read counts** extracted from `strand_summary.txt` files produced during PacBio sequencing analysis.
+
+It is ideal for identifying strand bias, visualizing sample coverage, and spotting potential sequencing anomalies across many individual samples.
+
+---
+## Features
+
+- Parses `strand_summary.txt` files from nested subdirectories  
+- Extracts forward and reverse strand read counts  
+- Generates a **log–log scatter plot**  
+- Includes a diagonal **reference line (F = R)**  
+- Clean, minimalist layout with:
+- No grid clutter
+- Legend positioned at the **top left**
+
+## Expected folder structure
+```
+coverage_output/
+  Sample_01/
+      forward_reads.bam
+      forward_reads.sorted.bam
+      forward_reads.sorted.bam.bai
+      reverse_reads.bam
+      reverse_reads.sorted.bam
+      reverse_reads.sorted.bam.bai
+      strand_summary.txt
+   Sample_02/
+      forward_reads.bam
+      forward_reads.sorted.bam
+      forward_reads.sorted.bam.bai
+      reverse_reads.bam
+      reverse_reads.sorted.bam
+      reverse_reads.sorted.bam.bai
+      strand_summary.txt
+
+Each strand summary.txt should contain lines like:
+↳ Forward strand: 29124 (46.84%)
+↳ Reverse strand: 33054 (53.16%)
+
+```   
+
+## Usage
+
+```bash
+python3 Forward_to_reverse_strand_per_sample.py --summary_root .. --output strand_log_scatter.png
+
+```
+## Output
+
+A scatter plot named strand_log_scatter.png (or your specified --output) showing:
+   X-axis: forward read counts (log scale)
+   Y-axis: reverse read counts (log scale)
+   Diagonal y = x reference line
+   Legend in the top-left corner
+
+## Requirements
+
+- Python 3.7 and above
+- `matplotlib`
+- `numpy`
+- `re`
+
+Install requirements via pip:
+
+```bash
+pip install matplotlib numpy
+```
+   
 # Step 3: Strand-Specific BAM Coverage Analysis of individual datasets
 
 Python pipeline that processes BAM files to: 
