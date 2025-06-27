@@ -6,6 +6,7 @@ The steps of my work that used custom Python code are:
 1. Strand-specific BAM Coverage Analysis of Pacbio datasets (Code: LogCoverage_and_Coverage_ratios.py)
    
 2  (a)Summary plot of read percentages from pooled datasets (Code: Summary_of_Pacbio_read_percentages.py)
+
    (b)Log-scaled scatter plot of Forward vs Reverse read counts per sample fo individual datasets (Code: Forward_to_reverse_read_strand_per_sample.py)
    
 3. Strand-specific BAM Coverage Analysis of individual Illumina datasets (Code: PerSample_LogCoverage_and_Coverage_ratios.py)
