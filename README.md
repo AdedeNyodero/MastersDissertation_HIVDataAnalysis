@@ -1,4 +1,4 @@
-# MastersDissertation_HIVDataAnalysis_25
+# MastersDissertation2025_HIVDataAnalysis
 This repository contains code used for my masters dissertation on Quantitative analysis of suspected HIV proviral DNA reads observed from the strand-specific HIV RNA metagenomic libraries. 
 This dissertation was conceptualized, written and submitted between May 2025 to July 2025
 
