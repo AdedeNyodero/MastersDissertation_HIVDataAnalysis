@@ -1,8 +1,8 @@
 # MastersDissertation2025_HIVDataAnalysis
-This repository contains code used for my masters dissertation on Quantitative analysis of suspected HIV proviral DNA reads observed from the strand-specific HIV RNA metagenomic libraries. 
+This repository contains code used for my masters dissertation on Quantitative analysis of suspected HIV proviral DNA reads observed from strand-specific HIV metagenomic sequencing libraries. 
 This dissertation was conceptualized, written and submitted between May 2025 to July 2025
 
-The steps of my work that used custom Python code are:
+The starting data for my analysis consisted of BAM files. The steps of my workflow that involved custom Python scripts are as follows:
 
 1. Strand-specific BAM Coverage Analysis of Pacbio datasets (Code: LogCoverage_and_Coverage_ratios.py)
 
