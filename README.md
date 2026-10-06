@@ -2,7 +2,7 @@
 This repository contains the python code used for my MSc Genomic Medicine dissertation (University of Oxford 2025) on *Quantitative analysis of suspected HIV proviral DNA reads observed from strand-specific HIV metagenomic sequencing data.*
 
 **Summary**
-HIV proviral DNA persists in cells even when treatment suppresses viral load, so it could help detect drug resistance early. This project tests whether Strand-Specific Metagenomic sequencing built for HIV RNA, the veSEQ-HIV method developed by the Bonsall group also captures proviral DNA [Bonsall et al. (2020)], (https://pubmed.ncbi.nlm.nih.gov/32669382/).
+HIV proviral DNA persists in cells even when treatment suppresses viral load, so it could help detect drug resistance early. This project tests whether Strand-Specific Metagenomic sequencing built for HIV RNA, the veSEQ-HIV method developed by the Bonsall group also captures proviral DNA [Bonsall et al. (2020)] (https://pubmed.ncbi.nlm.nih.gov/32669382/).
 
 **The idea:** HIV RNA appears almost entirely as forward-strand reads, while double-stranded proviral DNA also produces reverse-strand reads. The first 454 bases of the proviral genome have no RNA equivalent, so reads there should split roughly 1:1 between strands if proviral DNA is present.
 
@@ -17,6 +17,20 @@ Pre-processing used the Located K-mer Assembler (LKA), developed by Dr Nicholas 
 
 All scripts here were written by me, with supervision from Dr David Bonsall and Dr Nicholas Grayson.
 
+## Workflow
+
+### Workflow at a glance
+
+| Step | What it does | Script | Input | Main output |
+|------|--------------|--------|-------|-------------|
+| 1 | Strand-specific coverage, pooled PacBio data | `LogCoverage_and_Coverage_ratios.py` | Folder of sorted, indexed BAM files | Coverage and ratio plots, `strand_summary.txt`, `coverage_table.tsv` |
+| 2a | Percentage of forward vs reverse reads per pool | `Summary_of_Pacbio_read_percentages.py` | `strand_summary.txt` files from Step 1 | Stacked bar plot |
+| 2b | Forward vs reverse read counts per sample | `Forward_to_reverse_read_strand_per_sample.py` | Per-sample `strand_summary.txt` files | `strand_log_scatter.png` |
+| 3 | Strand-specific coverage, individual Illumina data | `PerSample_LogCoverage_and_Coverage_ratios.py` | Folder of sorted, indexed BAM files | Per-sample plots and tables, summary TSV, interactive HTML plot |
+| 4 | Reads spanning a chosen HXB2 region | `Analysis_of_reads_spanning_fiveprime_U3_R_region.py` | One or more sorted BAM files | Summary CSV, plots, optional reverse-read files |
+
+### Workflow steps listed
+
 The starting data for my analysis consisted of BAM files. The steps of my workflow that involved custom Python scripts are as follows:
 
 1. Strand-specific BAM Coverage Analysis of Pacbio datasets (Code: LogCoverage_and_Coverage_ratios.py)
@@ -30,9 +44,7 @@ The starting data for my analysis consisted of BAM files. The steps of my workfl
 4. Strand-specific analysis of reads that span user defined HXB2 genomic regions (Code: Analysis_of_reads_spanning_fiveprime_U3_R_region.py)
 
 
-
-
-The python codes I used for each step of my analysis are documented here for reproducibility
+The codes I used for each step of my analysis are documented here for reproducibility
    
 
 # Step 1: Strand-Specific BAM Coverage Analysis of pooled datasets
