@@ -28,6 +28,7 @@ All scripts here were written by me, with supervision from Dr David Bonsall and 
 | 2b | Forward vs reverse read counts per sample | `Forward_to_reverse_read_strand_per_sample.py` | Per-sample `strand_summary.txt` files | `strand_log_scatter.png` |
 | 3 | Strand-specific coverage, individual Illumina data | `PerSample_LogCoverage_and_Coverage_ratios.py` | Folder of sorted, indexed BAM files | Per-sample plots and tables, summary TSV, interactive HTML plot |
 | 4 | Reads spanning a chosen HXB2 region | `Analysis_of_reads_spanning_fiveprime_U3_R_region.py` | One or more sorted BAM files | Summary CSV, plots, optional reverse-read files |
+| 5 | Finds reads with sequence extending past the mapped HIV region (overhangs) | `OverhangsAnalysisScript.py` | Sorted BAM files of long reads | Plot of the percentage of reads with 5' or 3' overhangs over 50 bases, in 100-base bins along the genome |
 
 ### Workflow steps listed
 
@@ -339,3 +340,22 @@ strand_read_output/
    lollipop_reverse_percent.png
 ```
 
+# Step 5: Overhang analysis
+
+Some reads extend past the mapped HIV sequence. These overhangs could come from the human genome at host integration sites, or from spliced HIV transcripts that map to several exons. Ethical approval for this project covered HIV sequences only, so this script does not analyse non-HIV reads. It measures where along the HIV genome reads with an overhang longer than 50 bases are found.
+
+See OverhangsAnalysisScript.py for the code used.
+
+## Input
+
+- Sorted and indexed BAM files
+
+## Usage
+
+```bash
+python OverhangsAnalysisScript.py
+```
+
+## Output
+
+- A plot of the percentage of forward and reverse reads with a 5' or 3' overhang longer than 50 bases, grouped in bins of 100 bases along the HIV genome
