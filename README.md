@@ -1,6 +1,21 @@
 # MastersDissertation2025_HIVDataAnalysis
-This repository contains code used for my masters dissertation on Quantitative analysis of suspected HIV proviral DNA reads observed from strand-specific HIV metagenomic sequencing libraries. 
+This repository contains the python code used for my MSc Genomic Medicine dissertation (University of Oxford 2025) on *Quantitative analysis of suspected HIV proviral DNA reads observed from strand-specific HIV metagenomic sequencing data.*
+
+**Summary**
+HIV proviral DNA persists in cells even when treatment suppresses viral load, so it could help detect drug resistance early. This project tests whether Strand-Specific Metagenomic sequencing built for HIV RNA, the veSEQ-HIV method developed by the Bonsall group also captures proviral DNA [Bonsall et al. (2020)], (https://pubmed.ncbi.nlm.nih.gov/32669382/).
+
+**The idea:** HIV RNA appears almost entirely as forward-strand reads, while double-stranded proviral DNA also produces reverse-strand reads. The first 454 bases of the proviral genome have no RNA equivalent, so reads there should split roughly 1:1 between strands if proviral DNA is present.
+
+The pipeline in this repository separates reads by strand, computes per-base coverage and forward/reverse ratios, groups samples by viral load, and analyses reads that span the proviral-specific regions. 
+
 This dissertation was conceptualized, written and submitted between May 2025 to July 2025
+
+**Data and credits**
+No sequencing data is included. All data belongs to the Bonsall group and was collected under the PANGEA-HIV consortium. Ethical approval restricted analysis to HIV sequences, so all non-HIV reads were removed before my analysis.
+The starting point for every script below is a set of sorted and indexed BAM files (sorted and indexed with samtools).
+Pre-processing used the Located K-mer Assembler (LKA), developed by Dr Nicholas Grayson. This assembler tool is not part of this repository and is available from the Bonsall group on request.
+
+All scripts here were written by me, with supervision from Dr David Bonsall and Dr Nicholas Grayson.
 
 The starting data for my analysis consisted of BAM files. The steps of my workflow that involved custom Python scripts are as follows:
 
